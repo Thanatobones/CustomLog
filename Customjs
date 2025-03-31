@@ -1,4 +1,14 @@
 /* Custom JS pour Logseq - Interactivité avancée */
+// Test visuel pour vérifier que le custom JS est bien exécuté
+const testDiv = document.createElement("div");
+testDiv.innerText = "Custom JS fonctionne !";
+testDiv.style.position = "fixed";
+testDiv.style.bottom = "10px";
+testDiv.style.right = "10px";
+testDiv.style.background = "yellow";
+testDiv.style.padding = "5px 10px";
+testDiv.style.zIndex = 9999;
+document.body.appendChild(testDiv);
 
 /* Menu flottant pour ouvrir un modal interactif dans la sidebar */
 (function() {
