@@ -1,0 +1,156 @@
+
+---
+
+**custom.css**
+
+```css
+/* Custom CSS pour Logseq - Interface ultra interactive et décorée */
+
+/* Importation d'une police moderne */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --primary-color: #1e90ff;
+  --secondary-color: #ff4500;
+  --accent-color: #32cd32;
+  --header-bg: url('https://source.unsplash.com/collection/190727/1600x900');
+  --sidebar-bg: url('https://source.unsplash.com/collection/190728/800x1200');
+  --button-radius: 25px;
+  --border-radius: 15px;
+}
+
+/* Corps de page */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Header avec effet parallax */
+header {
+  background: var(--header-bg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  border-bottom: 4px solid var(--primary-color);
+}
+header::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.3), transparent);
+}
+
+/* Titre du header */
+header h1 {
+  position: relative;
+  z-index: 2;
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+}
+
+/* Sidebar décorative (bande de gauche) */
+.left-sidebar {
+  background-color: #f0f4f8;
+  background-image: url('https://source.unsplash.com/collection/888146/300x600?pattern');
+  background-size: cover;
+  background-position: center;
+  padding: 1rem;
+  width: 280px;
+  transition: all 0.3s ease;
+  border-right: 2px solid #d0d8e0;
+  position: relative;
+}
+.left-sidebar:hover {
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2);
+}
+.left-sidebar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0));
+  pointer-events: none;
+}
+
+/* Entête de la sidebar */
+.left-sidebar .sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #c0c8d0;
+  padding-bottom: 0.5rem;
+}
+.left-sidebar .sidebar-header h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* Bouton "Nouvelle page" */
+.left-sidebar .new-page-button {
+  background: linear-gradient(135deg, #1e90ff, #32cd32);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 0.9rem;
+}
+.left-sidebar .new-page-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Style des éléments de menu (raccourcis) */
+.left-sidebar .menu-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+.left-sidebar .menu-item:hover {
+  background-color: rgba(30, 144, 255, 0.15);
+  transform: translateX(4px);
+}
+.left-sidebar .menu-item .icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+}
+.left-sidebar .menu-item.pinned {
+  background-color: rgba(30, 144, 255, 0.2);
+  border-left: 4px solid #1e90ff;
+}
+.left-sidebar .menu-item.selected {
+  animation: pulse 1s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(30, 144, 255, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(30, 144, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(30, 144, 255, 0); }
+}
+
+/* Styles pour le reste de l'interface (header, content, modals, etc.) */
+/* ... [Le reste du CSS avancé peut être ajouté ici selon tes besoins] ... */
