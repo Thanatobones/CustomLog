@@ -122,8 +122,4 @@
                 :quality 80}
 
  ;; --- Format des noms de fichiers : utilisation du triple lowbar pour les caractères spéciaux ---
- :file/name-format :triple-lowbar
-
- ;; Répétition des options d'éditeur pour être sûr qu'elles soient actives
- :editor/logical-outdenting? true
- :editor/preferred-pasting-file? true}
+ :file/name-format :triple-lowbar}
