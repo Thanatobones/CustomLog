@@ -1,0 +1,119 @@
+/* Custom JS pour Logseq - Interactivité avancée */
+
+/* Menu flottant pour ouvrir un modal interactif dans la sidebar */
+(function() {
+  document.addEventListener("DOMContentLoaded", function() {
+    // Création d'un menu flottant dans la sidebar gauche
+    const floatingMenu = document.createElement("button");
+    floatingMenu.innerText = "Nouvelle Page";
+    floatingMenu.className = "new-page-button";
+    floatingMenu.style.display = "block";
+    floatingMenu.style.margin = "1rem auto";
+    floatingMenu.addEventListener("click", function() {
+      // Ouvre la recherche pour créer une nouvelle page (fonctionnalité native Logseq)
+      document.execCommand('insertText', false, "[[Nouvelle Page]]");
+    });
+    
+    // Ajoute le menu dans la sidebar gauche
+    const leftSidebar = document.querySelector(".left-sidebar");
+    if (leftSidebar) {
+      // Insertion en haut de la sidebar
+      leftSidebar.insertBefore(floatingMenu, leftSidebar.firstChild);
+    }
+    
+    /* Exemple d'un module interactif: Menu flottant dans le coin pour options avancées */
+    const advancedMenu = document.createElement("div");
+    advancedMenu.id = "floating-advanced-menu";
+    advancedMenu.style.position = "fixed";
+    advancedMenu.style.bottom = "20px";
+    advancedMenu.style.right = "20px";
+    advancedMenu.style.zIndex = "10000";
+    advancedMenu.style.backgroundColor = "rgba(30, 144, 255, 0.9)";
+    advancedMenu.style.color = "#fff";
+    advancedMenu.style.padding = "10px 15px";
+    advancedMenu.style.borderRadius = "10px";
+    advancedMenu.style.cursor = "pointer";
+    advancedMenu.style.boxShadow = "0 4px 8px rgba(0,0,0,0.3)";
+    advancedMenu.innerText = "Menu Avancé";
+    document.body.appendChild(advancedMenu);
+    
+    advancedMenu.addEventListener("click", function() {
+      // Exemple: affiche un modal draggable
+      showDraggableModal();
+    });
+    
+    function showDraggableModal() {
+      const overlay = document.createElement("div");
+      overlay.style.position = "fixed";
+      overlay.style.top = "0";
+      overlay.style.left = "0";
+      overlay.style.width = "100%";
+      overlay.style.height = "100%";
+      overlay.style.backgroundColor = "rgba(0,0,0,0.7)";
+      overlay.style.display = "flex";
+      overlay.style.alignItems = "center";
+      overlay.style.justifyContent = "center";
+      overlay.style.zIndex = "10001";
+      
+      const modal = document.createElement("div");
+      modal.className = "modal";
+      modal.style.cursor = "move";
+      modal.innerHTML = `
+        <h2>Menu Avancé</h2>
+        <p>Sélectionne une option :</p>
+        <button class="custom-action" id="option1">Option 1</button>
+        <button class="custom-action" id="option2">Option 2</button>
+        <button class="custom-action" id="closeModal">Fermer</button>
+      `;
+      
+      overlay.appendChild(modal);
+      document.body.appendChild(overlay);
+      
+      dragElement(modal);
+      
+      document.getElementById("closeModal").addEventListener("click", function() {
+        document.body.removeChild(overlay);
+      });
+      
+      overlay.addEventListener("click", function(e) {
+        if (e.target === overlay) {
+          document.body.removeChild(overlay);
+        }
+      });
+      
+      document.getElementById("option1").addEventListener("click", function() {
+        alert("Option 1 sélectionnée !");
+      });
+      document.getElementById("option2").addEventListener("click", function() {
+        alert("Option 2 sélectionnée !");
+      });
+    }
+    
+    function dragElement(elmnt) {
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      elmnt.onmousedown = dragMouseDown;
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+      }
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+  });
+})();
